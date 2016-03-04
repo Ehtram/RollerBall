@@ -18,6 +18,6 @@ public class MainActivity extends AppCompatActivity {
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
-       
+
     }
 }
