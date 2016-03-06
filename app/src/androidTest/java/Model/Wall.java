@@ -11,5 +11,6 @@ public class Wall extends Component {
         super.setPosY(posY);
         super.setPosY(posY);
         super.setMyRepresentation(myRepresentation);
+        
     }
 }
