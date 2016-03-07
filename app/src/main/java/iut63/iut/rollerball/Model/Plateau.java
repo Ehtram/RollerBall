@@ -1,4 +1,4 @@
-package Model;
+package iut63.iut.rollerball.Model;
 
 import java.util.ArrayList;
 import java.util.List;

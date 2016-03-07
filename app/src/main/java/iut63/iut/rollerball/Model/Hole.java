@@ -1,4 +1,4 @@
-package Model;
+package iut63.iut.rollerball.Model;
 
 /**
  * Created by Cedric on 04/03/2016.
