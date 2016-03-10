@@ -1,5 +1,6 @@
 package iut63.iut.rollerball.Model;
 
+import android.graphics.Bitmap;
 import android.media.Image;
 
 /**
@@ -7,7 +8,7 @@ import android.media.Image;
  */
 public class Loser extends Hole {
 
-    public Loser(int posX, int posY, Image myRepresentation){
+    public Loser(int posX, int posY, Bitmap myRepresentation){
         setPosX(posX);
         setPosY(posY);
         setMyRepresentation(myRepresentation);

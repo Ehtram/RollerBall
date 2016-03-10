@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         setContentView(R.layout.activity_main);
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_UI);
        // monImage = (ImageView)findViewById(R.id.myBall);
 
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
-    public void onSensorChanged ( SensorEvent event){
+    public void onSensorChanged (SensorEvent event){
 
         Sensor sensor = event.sensor;
         float [] values = event.values;
@@ -65,33 +65,33 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         synchronized (this) {
             Log.d("onsensorchanged", "onSensorChanged: " + sensor + ", x: " +
                     values[0] + ", y: " + values[1] + ", z: " + values[2]);
-            if (sensor.getType() == Sensor.TYPE_GYROSCOPE ) {
+           // if (sensor.getType() == Sensor.TYPE_GYROSCOPE ) {
 
-                float x = event.values[1];
-                float y = event.values[0];
+                float x = event.values[0];
+                float y = event.values[1];
                 ball.setmSpeedX(ball.getmSpeedX() + x);
-                if(ball.getmSpeedX() > 20)
-                    ball.setmSpeedX(20);
-                if(ball.getmSpeedX() < -20)
-                    ball.setmSpeedX(-20);
+                if(ball.getmSpeedX() > 10)
+                    ball.setmSpeedX(10);
+                if(ball.getmSpeedX() < -10)
+                    ball.setmSpeedX(-10);
 
                 ball.setmSpeedY(ball.getmSpeedY()+ y ) ;
-                if(ball.getmSpeedY() > 20)
-                    ball.setmSpeedY(20);
-                if(ball.getmSpeedY() < -20)
-                    ball.setmSpeedY(-20);
+                if(ball.getmSpeedY() > 10)
+                    ball.setmSpeedY(10);
+                if(ball.getmSpeedY() < -10)
+                    ball.setmSpeedY(-10);
 
-               // if((int)(ball.getPosY() + ball.getmSpeedY()) <   heightScreen&& (int)(ball.getPosY() + ball.getmSpeedY()) >0)
+               if((int)(ball.getPosY() + ball.getmSpeedY()) <   heightScreen&& (int)(ball.getPosY() + ball.getmSpeedY()) >0)
                     ball.setPosY((int) (ball.getPosY() + ball.getmSpeedY()));
-              //  else
-              //     ball.setmSpeedY(0);
-              //  if((int) (ball.getPosX() + ball.getmSpeedX()) > 0 && (int) (ball.getPosX() + ball.getmSpeedX()) < widhtScreen)
-                    ball.setPosX((int) (ball.getPosX() + ball.getmSpeedX()));
-            //    else
-               //     ball.setmSpeedX(0);
+               else
+                   ball.setPosY((int) (ball.getPosY()));
+                if((int) (ball.getPosX() - ball.getmSpeedX()) > 0 && (int) (ball.getPosX() - ball.getmSpeedX()) < widhtScreen)
+                    ball.setPosX((int) (ball.getPosX() - ball.getmSpeedX()));
+                else
+                   ball.setPosX((int) (ball.getPosX()));
 
                 game.run(ball.getPosX(),ball.getPosY());
-            }
+          //  }
         }
     }
 
