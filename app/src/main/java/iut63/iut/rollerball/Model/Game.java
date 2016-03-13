@@ -74,8 +74,8 @@ public class Game{
         listOfWall.add(new Loser(WidhtScreen/2 +50,HeightScreen/2+ 295,hole));
         listOfWall.add(new Loser(WidhtScreen/2 -5,HeightScreen/2 +150,hole));
         listOfWall.add(new Wall(WidhtScreen/2 +115,HeightScreen/2 + 150, 150,50, wallRepresentationHor));
-        listOfWall.add(new Wall(WidhtScreen/2 - 150,HeightScreen/2,150,50, wallRepresentationHor));
-        listOfWall.add(new Wall(WidhtScreen/2 - 300,HeightScreen/2,150,50, wallRepresentationHor));
+       // listOfWall.add(new Wall(WidhtScreen/2 - 150,HeightScreen/2,150,50, wallRepresentationHor));
+       // listOfWall.add(new Wall(WidhtScreen/2 - 300,HeightScreen/2,150,50, wallRepresentationHor));
 
         listOfWall.add(new Loser(0,0,hole));
         background = BitmapFactory.decodeResource(context.getResources(), R.drawable.background);
@@ -127,7 +127,7 @@ public class Game{
 
     public int checkCollision(float x, float y){
 
-        int x1,x2,y1,y2, centerX,centerY;
+        int x1,x2,y1,y2, centerX,centerY, difX, difY, cornerDistance_sq;
         List<Integer> pointsX = new ArrayList<>();
         List<Integer> pointsY = new ArrayList<>();
         for(int i= 0; i<360; i++){
@@ -140,11 +140,101 @@ public class Game{
             if(w instanceof Wall){
                 centerY = w.getHeight()/2 + w.getPosY();
                 centerX = w.getWidht()/2 + w.getPosX();
-                x2 = w.getPosX();
-                for(Integer point :  pointsX){
-                    y1 = pointsY.get(pointsX.indexOf(point));
-                    x1 = point;
 
+
+                    if(x>w.getPosX() && x<w.getPosX()+w.getWidht()){
+                        if(y< centerY){
+                            if(y>w.getPosY()-17){
+                                return 2;
+                            }
+                        }else{
+                            if(y<w.getPosY()+w.getHeight()+17){
+                                return 4;
+                            }
+                        }
+                    }
+                    if(y>w.getPosY() && y<w.getPosY()+w.getHeight()){
+                        if(x<centerX){
+                            if(x>w.getPosX()-17){
+                                return 1;
+                            }
+                        }
+                        else {
+                            if(x<w.getPosX()+w.getWidht()+17){
+                                return 3;
+                            }
+                        }
+                    }
+                    difX = (int) x - ((Wall) w).getCercle1X();
+                    difY = (int) y - ((Wall) w).getCercle1Y();
+                    if(Math.sqrt(difX * difX + difY * difY) < 17){
+                        return 5;
+                    }
+                    difX = (int) x - ((Wall) w).getCercle2X();
+                    difY = (int) y - ((Wall) w).getCercle2Y();
+                    if(Math.sqrt(difX * difX + difY * difY) < 17){
+                        return 6;
+                    }
+                    difX = (int) x - ((Wall) w).getCercle3X();
+                    difY = (int) y - ((Wall) w).getCercle3Y();
+                    if(Math.sqrt(difX * difX + difY * difY) < 17){
+                        return 8;
+                    }
+                    difX = (int) x - ((Wall) w).getCercle4X();
+                    difY = (int) y - ((Wall) w).getCercle4Y();
+                    if(Math.sqrt(difX * difX + difY * difY) < 17){
+                        return 7;
+                    }
+
+
+
+
+
+
+                //Check Collision angle des obstacles avec boules, Ralenti le deplacement et les frames
+
+                    /*
+
+                    if(y>w.getPosY()-17 && y<w.getPosY() && x<w.getPosX() && x>w.getPosX()-17){
+                        for(int i : ((Wall) w).getxSupLeft()){
+                            y2 = ((Wall) w).getySupLeft().get(((Wall) w).getxSupLeft().indexOf(i));
+                            if(x>i && y>y2){
+                                return 5;
+                            }
+                        }
+                    }
+                    if(y>w.getPosY()-17 && y<w.getPosY() && x<w.getPosX()+17+w.getWidht() && x>w.getPosX()+w.getWidht()){
+                        for(int i : ((Wall) w).getxSupRight()){
+                            y2 = ((Wall) w).getySupRight().get(((Wall) w).getxSupRight().indexOf(i));
+                            if(y>y2 && x<i){
+                                return 8;
+                            }
+                        }
+                    }
+                    if(y<w.getPosY()+w.getHeight()+17 && y>w.getPosY()+w.getHeight() && x<w.getPosX() && x>w.getPosX()-17){
+                        for(int i : ((Wall) w).getxInfLeft()){
+                            y2 =((Wall) w).getyInfLeft().get(((Wall) w).getxInfLeft().indexOf(i));
+                            if(y<y2 && x>i){
+                                return 6;
+                            }
+                        }
+                    }
+                    if(y<w.getPosY()+w.getHeight()+17 && y>w.getPosY()+w.getHeight() && x> w.getPosX()+w.getWidht() && x<w.getPosX()+w.getWidht() +17){
+                        for(int i : ((Wall) w).getxInfRight()){
+                            y2 = ((Wall) w).getyInfRight().get(((Wall) w).getxInfRight().indexOf(i));
+                            if(x<i && y<y2){
+                                return 7;
+                            }
+                        }
+                    }
+*/
+
+
+
+
+
+
+                    /*
 
                     if(x>w.getPosX() && x<w.getPosX()+w.getWidht()){
                         if(y< centerY){
@@ -172,6 +262,8 @@ public class Game{
                             }
                         }
                     }
+
+                    */
 
                     // 2emm test bugé
 
@@ -242,8 +334,8 @@ public class Game{
                 }
             }
 
-        }
-        return 0;
+
+    return 0;
     }
 
 

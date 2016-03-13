@@ -35,8 +35,8 @@ public class Ball extends Component{
 
 
     public Ball(int id,int posX, int posY, Bitmap myRepresentation, int PosMaxX, int PosMaxY){
-        setPosX(posX);
-        setPosY(posY);
+        setPosX(posX+17);
+        setPosY(posY+17);
         posMaxX = PosMaxX;
         posMaxY = PosMaxY;
 

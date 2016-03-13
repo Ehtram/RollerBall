@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Ball ball = game.getBall();
         synchronized (this) {
 
-           // if (sensor.getType() == Sensor.TYPE_GYROSCOPE ) {
 
                 float x = event.values[0];
                 float y = event.values[1];
@@ -78,26 +77,67 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 if(ball.getmSpeedY() > 0.1*ratio)
                     ball.setmSpeedY((float) (0.1*ratio));
                 if(ball.getmSpeedY() < -0.1*ratio)
-                    ball.setmSpeedY((float) (-0.1*ratio));
-
-                int check = game.checkCollision(ball.getPosX() + ball.getmSpeedX(), ball.getPosY() + ball.getmSpeedY());
+                    ball.setmSpeedY((float) (-0.1 * ratio));
 
 
 
-               if(((int)(ball.getPosY() + ball.getmSpeedY()) <   heightScreen && (int)(ball.getPosY() + ball.getmSpeedY()) >0) && check!=4 && check != 2)
-                    ball.setPosY((int) (ball.getPosY() + ball.getmSpeedY()));
-               else
-                   ball.setPosY((int) (ball.getPosY()));
+                int check = game.checkCollision(ball.getPosX() - ball.getmSpeedX(), ball.getPosY() + ball.getmSpeedY());
 
-                if(((int) (ball.getPosX() - ball.getmSpeedX()) > 0 && (int) (ball.getPosX() - ball.getmSpeedX()) < widhtScreen) && check != 1 && check != 3)
-                    ball.setPosX((int) (ball.getPosX() - ball.getmSpeedX()));
-                else
-                   ball.setPosX((int) (ball.getPosX()));
+                    if(check == 5){
+                        if(((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() < 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()>0)
+                                ||((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() > 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()>0)
+                                ||((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() < 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()<0)
+                                ){
+                                ball.setPosY((int) (ball.getPosY() + ball.getmSpeedY()));
+                                ball.setPosX((int) (ball.getPosX() - ball.getmSpeedX()));
+                        }
+                    }else if(check == 6){
+                        if(((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() > 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()>0)
+                                ||((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() < 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()>0)
+                                ||((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() > 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()<0)
+                                )
+                        {
+                            ball.setPosY((int) (ball.getPosY() + ball.getmSpeedY()));
+                            ball.setPosX((int) (ball.getPosX() - ball.getmSpeedX()));
+                        }
+                    }else if(check == 7){
+                        if(((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() > 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()<0)
+                                ||((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() > 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()>0)
+                                ||((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() < 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()<0)
+                                )
+                        {
+                            ball.setPosY((int) (ball.getPosY() + ball.getmSpeedY()));
+                            ball.setPosX((int) (ball.getPosX() - ball.getmSpeedX()));
+                        }
 
-                game.run(ball.getPosX(),ball.getPosY());
-          //  }
+                    }else if(check ==8 ){
+                        if(((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() < 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()<0)
+                                ||((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() < 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()>0)
+                                ||((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() > 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()<0)
+                                )
+                        {
+                            ball.setPosY((int) (ball.getPosY() + ball.getmSpeedY()));
+                            ball.setPosX((int) (ball.getPosX() - ball.getmSpeedX()));
+                        }
+                    }else{
+
+                        if(((int)(ball.getPosY() + ball.getmSpeedY()) <   heightScreen && (int)(ball.getPosY() + ball.getmSpeedY()) >0) && check!=4 && check != 2)
+                            ball.setPosY((int) (ball.getPosY() + ball.getmSpeedY()));
+                        else
+                            ball.setPosY((int) (ball.getPosY()));
+
+                        if(((int) (ball.getPosX() - ball.getmSpeedX()) > 0 && (int) (ball.getPosX() - ball.getmSpeedX()) < widhtScreen) && check != 1 && check != 3)
+                            ball.setPosX((int) (ball.getPosX() - ball.getmSpeedX()));
+                        else
+                            ball.setPosX((int) (ball.getPosX()));
+
+                    }
+
+            game.run(ball.getPosX(),ball.getPosY());
+
         }
     }
+
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
