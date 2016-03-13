@@ -9,30 +9,14 @@ import android.media.Image;
  */
 public class Wall extends Component {
 
-    private int widht;
-    private int height;
 
-    public int getHeight() {
-        return height;
-    }
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public int getWidht() {
-        return widht;
-    }
-
-    public void setWidht(int widht) {
-        this.widht = widht;
-    }
 
     public Wall(int posX, int posY,int widht,int height, Bitmap myRepresentation){
         super.setPosX(posX);
         super.setPosY(posY);
-        this.height = height;
-        this.widht = widht;
+        super.setHeight(height);
+        super.setWidht(widht);
         super.setMyRepresentation(myRepresentation);
     }
 }

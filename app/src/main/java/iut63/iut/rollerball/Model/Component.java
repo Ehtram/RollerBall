@@ -10,6 +10,27 @@ public abstract class Component {
 
     private int posX;
     private int posY;
+
+    private int widht;
+    private int height;
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWidht() {
+        return widht;
+    }
+
+
+    public void setWidht(int widht) {
+        this.widht = widht;
+    }
+
     //patern pont à implementer si on à le temps
     private Bitmap myRepresentation;
 

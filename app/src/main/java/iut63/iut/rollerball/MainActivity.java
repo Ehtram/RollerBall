@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private double xa, oldValueX;
     private double ya, oldValueY;
     DisplayMetrics metrics = new DisplayMetrics();
-
+    private float ratio;
     private int heightScreen, widhtScreen;
 
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_UI);
+        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_GAME);
        // monImage = (ImageView)findViewById(R.id.myBall);
 
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         widhtScreen = metrics.widthPixels;
 
         game = new Game(this,(SurfaceView)findViewById(R.id.surfaceView), heightScreen,widhtScreen);
-
+        ratio = (float) (game.getHypothenus() / 34.0f);
 
     }
 
@@ -63,29 +63,33 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         float [] values = event.values;
         Ball ball = game.getBall();
         synchronized (this) {
-            Log.d("onsensorchanged", "onSensorChanged: " + sensor + ", x: " +
-                    values[0] + ", y: " + values[1] + ", z: " + values[2]);
+
            // if (sensor.getType() == Sensor.TYPE_GYROSCOPE ) {
 
                 float x = event.values[0];
                 float y = event.values[1];
                 ball.setmSpeedX(ball.getmSpeedX() + x);
-                if(ball.getmSpeedX() > 10)
-                    ball.setmSpeedX(10);
-                if(ball.getmSpeedX() < -10)
-                    ball.setmSpeedX(-10);
+                if(ball.getmSpeedX() > 0.1*ratio)
+                    ball.setmSpeedX((float) (0.1*ratio));
+                if(ball.getmSpeedX() < -0.1*ratio)
+                    ball.setmSpeedX((float) (-0.1 * ratio));
 
                 ball.setmSpeedY(ball.getmSpeedY()+ y ) ;
-                if(ball.getmSpeedY() > 10)
-                    ball.setmSpeedY(10);
-                if(ball.getmSpeedY() < -10)
-                    ball.setmSpeedY(-10);
+                if(ball.getmSpeedY() > 0.1*ratio)
+                    ball.setmSpeedY((float) (0.1*ratio));
+                if(ball.getmSpeedY() < -0.1*ratio)
+                    ball.setmSpeedY((float) (-0.1*ratio));
 
-               if((int)(ball.getPosY() + ball.getmSpeedY()) <   heightScreen&& (int)(ball.getPosY() + ball.getmSpeedY()) >0)
+                int check = game.checkCollision(ball.getPosX() + ball.getmSpeedX(), ball.getPosY() + ball.getmSpeedY());
+
+
+
+               if(((int)(ball.getPosY() + ball.getmSpeedY()) <   heightScreen && (int)(ball.getPosY() + ball.getmSpeedY()) >0) && check!=4 && check != 2)
                     ball.setPosY((int) (ball.getPosY() + ball.getmSpeedY()));
                else
                    ball.setPosY((int) (ball.getPosY()));
-                if((int) (ball.getPosX() - ball.getmSpeedX()) > 0 && (int) (ball.getPosX() - ball.getmSpeedX()) < widhtScreen)
+
+                if(((int) (ball.getPosX() - ball.getmSpeedX()) > 0 && (int) (ball.getPosX() - ball.getmSpeedX()) < widhtScreen) && check != 1 && check != 3)
                     ball.setPosX((int) (ball.getPosX() - ball.getmSpeedX()));
                 else
                    ball.setPosX((int) (ball.getPosX()));
@@ -114,5 +118,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onStop() {
         super.onStop();
     }
+
+
 }
 
