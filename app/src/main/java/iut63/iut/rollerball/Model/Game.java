@@ -74,8 +74,8 @@ public class Game{
         listOfWall.add(new Loser(WidhtScreen/2 +50,HeightScreen/2+ 295,hole));
         listOfWall.add(new Loser(WidhtScreen/2 -5,HeightScreen/2 +150,hole));
         listOfWall.add(new Wall(WidhtScreen/2 +115,HeightScreen/2 + 150, 150,50, wallRepresentationHor));
-       // listOfWall.add(new Wall(WidhtScreen/2 - 150,HeightScreen/2,150,50, wallRepresentationHor));
-       // listOfWall.add(new Wall(WidhtScreen/2 - 300,HeightScreen/2,150,50, wallRepresentationHor));
+        listOfWall.add(new Wall(WidhtScreen/2 - 150,HeightScreen/2,150,50, wallRepresentationHor));
+        listOfWall.add(new Wall(WidhtScreen/2 - 300,HeightScreen/2,150,50, wallRepresentationHor));
 
         listOfWall.add(new Loser(0,0,hole));
         background = BitmapFactory.decodeResource(context.getResources(), R.drawable.background);
@@ -230,10 +230,6 @@ public class Game{
 */
 
 
-
-
-
-
                     /*
 
                     if(x>w.getPosX() && x<w.getPosX()+w.getWidht()){
@@ -328,15 +324,37 @@ public class Game{
                                 return 4;
                             }
                         }*/
-
-
-
-                }
             }
 
+        }
 
     return 0;
     }
 
+
+    public boolean checkHole(float x, float y){
+        float difX,difY,T1,T2,T3, distance, sum;
+        for(Component c : listOfWall){
+            if(c instanceof  Hole){
+                difX = (int) x - ((Hole)c).getCenterX();
+                difY = (int) y - ((Hole)c).getCenterY();
+                if(Math.sqrt(difX * difX + difY * difY) < 40){
+                    distance =  (float)Math.sqrt(Math.pow(x-((Hole)c).getCenterX(),2)+Math.pow(y - ((Hole) c).getCenterY(), 2));
+
+                    T1 = (float) (17*17 * (Math.acos((distance * distance + 17*17 -(23*23))/ (2*distance*17))));
+                    T2 = (float) (23*23 * (Math.acos((distance*distance - (17 * 17) + 23 * 23)/ (2*distance*23))));
+
+                    T3 = (float) (0.5 * (Math.sqrt((17+23-distance)*(17-23+distance)*(23-17+distance)*(17+23+distance))));
+
+                    sum = T1 +T2 - T3;
+
+                    if(sum/(Math.PI*23*23)>0.01){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
 }

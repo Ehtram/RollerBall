@@ -8,10 +8,15 @@ import android.media.Image;
  */
 public class Loser extends Hole {
 
+    private float surface;
+
     public Loser(int posX, int posY, Bitmap myRepresentation){
         setPosX(posX);
         setPosY(posY);
+        setCenterX(posX+30);
+        setCenterY(posY+30);
         setMyRepresentation(myRepresentation);
         setIsWinner(false);
+        surface = (float)Math.PI * 45*45;
     }
 }

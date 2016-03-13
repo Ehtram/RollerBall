@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_GAME);
+        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_UI);
        // monImage = (ImageView)findViewById(R.id.myBall);
 
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                                 ){
                                 ball.setPosY((int) (ball.getPosY() + ball.getmSpeedY()));
                                 ball.setPosX((int) (ball.getPosX() - ball.getmSpeedX()));
+
                         }
                     }else if(check == 6){
                         if(((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() > 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()>0)
@@ -130,11 +131,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                             ball.setPosX((int) (ball.getPosX() - ball.getmSpeedX()));
                         else
                             ball.setPosX((int) (ball.getPosX()));
-
                     }
 
             game.run(ball.getPosX(),ball.getPosY());
-
+            if(game.checkHole(ball.getPosX(),ball.getPosY())){
+                Log.d("Test", "YOU LOOSE");
+            }
         }
     }
 

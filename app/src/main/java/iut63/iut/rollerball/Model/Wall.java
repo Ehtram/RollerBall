@@ -117,9 +117,6 @@ public class Wall extends Component {
 
 
 
-
-
-
         /*
         remplirGaucheSup(posX, posY);
         remplirDroiteSup(posX, posY, widht);
