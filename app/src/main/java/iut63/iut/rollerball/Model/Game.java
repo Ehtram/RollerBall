@@ -70,6 +70,13 @@ public class Game{
 
         listOfWall.add(new Wall(200,80,150,50, wallRepresentationHor));
         listOfWall.add(new Wall(WidhtScreen/2,HeightScreen/2,50,150, wallRepresentationVert));
+        listOfWall.add(new Wall(WidhtScreen/2,HeightScreen/2 + 285,50,150, wallRepresentationVert));
+        listOfWall.add(new Loser(WidhtScreen/2 +50,HeightScreen/2+ 295,hole));
+        listOfWall.add(new Loser(WidhtScreen/2 -5,HeightScreen/2 +150,hole));
+        listOfWall.add(new Wall(WidhtScreen/2 +115,HeightScreen/2 + 150, 150,50, wallRepresentationHor));
+        listOfWall.add(new Wall(WidhtScreen/2 - 150,HeightScreen/2,150,50, wallRepresentationHor));
+        listOfWall.add(new Wall(WidhtScreen/2 - 300,HeightScreen/2,150,50, wallRepresentationHor));
+
         listOfWall.add(new Loser(0,0,hole));
         background = BitmapFactory.decodeResource(context.getResources(), R.drawable.background);
 
