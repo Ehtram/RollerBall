@@ -75,10 +75,10 @@ public abstract class Level {
     }
 
 
-    public void run(float x, float y, int heightScreen, int widhtScreen,Boolean loose) {
-
+    public int run(float x, float y, int heightScreen, int widhtScreen,Boolean loose) {
+        int ret = 0;
         if (!holder.getSurface().isValid())
-            return;
+            return 0;
 
         c = holder.lockCanvas();
 
@@ -105,14 +105,15 @@ public abstract class Level {
 
             float size = p.measureText("You Loose");
             c.drawText("You Loose", widhtScreen / 2 - (size / 2), heightScreen / 4, p);
+            ret = -1;
         }else{
-            float size = p.measureText("You Loose");
+            float size = p.measureText("You Win");
             c.drawText("You Win", widhtScreen / 2 - (size / 2), heightScreen / 4, p);
-
+            ret = 1;
         }
-
-
         holder.unlockCanvasAndPost(c);
+        return ret;
+
     }
 
     public void checkCollision(float x, float y){
@@ -431,7 +432,7 @@ public abstract class Level {
         return false;
     }
 
-    public void checkWin(SensorManager mSensorManager, MainActivity mainActivity){
+    public int checkWin(SensorManager mSensorManager, MainActivity mainActivity){
         checkCollision(ball.getPosX() - ball.getmSpeedX(), ball.getPosY() + ball.getmSpeedY());
 
         if(ball.getListOfCollision().size()==1 || ball.getListOfCollision().size()==0){
@@ -527,8 +528,9 @@ public abstract class Level {
         if(checkHole(ball.getPosX(), ball.getPosY()) && !loose){
             mSensorManager.unregisterListener(mainActivity);
             loose = true;
-            run(ball.getPosX(), ball.getPosY(), heightScreen, widhtScreen, loose);
+            return run(ball.getPosX(), ball.getPosY(), heightScreen, widhtScreen, loose);
         }
+        return 0;
     }
 
 

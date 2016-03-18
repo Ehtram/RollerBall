@@ -17,6 +17,43 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_gravity="center" />
+        android:layout_gravity="center" >
+    </SurfaceView>
+
+    <Button
+        android:layout_width="147dp"
+        android:layout_height="wrap_content"
+        android:text="@string/retry"
+        android:id="@+id/retry"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        android:textSize="@dimen/retryValue"
+        android:textColor="#502424"
+        android:visibility="invisible"
+        android:textStyle="bold" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/next"
+        android:id="@+id/next"
+        android:textSize="@dimen/retryValue"
+        android:layout_gravity="right|center_vertical"
+        android:background="@android:color/transparent"
+        android:textColor="#502424"
+        android:visibility="invisible"
+        android:textStyle="bold" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/back"
+        android:id="@+id/back"
+        android:layout_gravity="left|center_vertical"
+        android:textSize="@dimen/retryValue"
+        android:background="@android:color/transparent"
+        android:textColor="#502424"
+        android:visibility="invisible"
+        android:textStyle="bold" />
 
 </FrameLayout>
