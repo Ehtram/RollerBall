@@ -11,8 +11,12 @@ public class Winner extends Hole{
     public Winner(int posX, int posY, Bitmap myRepresentation){
         setPosX(posX);
         setPosY(posY);
+        setCenterX(posX + myRepresentation.getWidth()/2);
+        setCenterY(posY + myRepresentation.getWidth() / 2);
         setMyRepresentation(myRepresentation);
-        setIsWinner(true);
+        setIsWinner(false);
+        setSurface((float)Math.PI * (myRepresentation.getWidth()/2 ) * (myRepresentation.getWidth()/2));
+
     }
 
 }

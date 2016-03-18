@@ -8,6 +8,9 @@ public abstract class Hole extends Component {
     private Boolean isWinner;
     private int centerX;
     private int centerY;
+    private float surface;
+    public float getSurface(){return surface;}
+    public void setSurface(float surface){this.surface = surface;}
 
     public int getCenterX() {
         return centerX;

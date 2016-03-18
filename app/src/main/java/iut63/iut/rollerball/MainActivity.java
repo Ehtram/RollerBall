@@ -20,21 +20,24 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.Map;
+
 import iut63.iut.rollerball.Model.Ball;
 import iut63.iut.rollerball.Model.Game;
+import iut63.iut.rollerball.Model.Wall;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     private SensorManager mSensorManager;
     private Sensor mSensor;
     private ImageView monImage;
-    private Boolean test= true;
+    private Boolean test = true;
     private double xa, oldValueX;
     private double ya, oldValueY;
     DisplayMetrics metrics = new DisplayMetrics();
     private float ratio;
     private int heightScreen, widhtScreen;
-
+    private Boolean loose =false;
 
     private Game game;
 
@@ -45,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_UI);
+        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_GAME);
        // monImage = (ImageView)findViewById(R.id.myBall);
 
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -62,8 +65,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Sensor sensor = event.sensor;
         float [] values = event.values;
         Ball ball = game.getBall();
-        synchronized (this) {
-
+        float rayon, angular, newX,newY;
 
                 float x = event.values[0];
                 float y = event.values[1];
@@ -81,8 +83,47 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
 
 
-                int check = game.checkCollision(ball.getPosX() - ball.getmSpeedX(), ball.getPosY() + ball.getmSpeedY());
+                game.checkCollision(ball.getPosX() - ball.getmSpeedX(), ball.getPosY() + ball.getmSpeedY());
 
+                if(ball.getListOfCollision().size()==1 || ball.getListOfCollision().size()==0){
+
+                    if(((int)(ball.getPosY() + ball.getmSpeedY()) <   heightScreen -(ball.getHeight()/2) && (int)(ball.getPosY() + ball.getmSpeedY()) >0+ (ball.getHeight()/2)) && !(ball.getListOfCollision().containsValue(4)) && !(ball.getListOfCollision().containsValue(2)))
+                        ball.setPosY((int) (ball.getPosY() + ball.getmSpeedY()));
+                    else
+                        ball.setPosY((int) (ball.getPosY()));
+
+                    if(((int) (ball.getPosX() - ball.getmSpeedX()) > 0 + (ball.getHeight()/2) && (int) (ball.getPosX() - ball.getmSpeedX()) < widhtScreen - (ball.getHeight()/2)) && !(ball.getListOfCollision().containsValue(1)) && !(ball.getListOfCollision().containsValue(3)))
+                        ball.setPosX((int) (ball.getPosX() - ball.getmSpeedX()));
+                    else
+                        ball.setPosX((int) (ball.getPosX()));
+/*
+                    if(ball.getListOfCollision().containsValue(5) || ball.getListOfCollision().containsValue(6)||ball.getListOfCollision().containsValue(7)||ball.getListOfCollision().containsValue(8)){
+                        Wall w = ball.getWallCollision();
+                        rayon = (float) Math.sqrt(Math.pow((w.getCercle1X()-ball.getPosX()),2)+ Math.pow((w.getCercle1Y()-ball.getPosY()),2));
+                        angular = (float) Math.acos(((ball.getPosX() - ball.getmSpeedX()) - w.getCercle1X()) / rayon);
+                        newX = (float) (w.getCercle1X() - ball.getMyRepresentation().getHeight()/2 * Math.cos(angular));
+                        newY = (float) (w.getCercle1Y() + ball.getMyRepresentation().getHeight()/2 * Math.sin(angular));
+                        ball.setPosX((int) newX);
+                        ball.setPosY((int) newY);
+                    }*/
+                }/* if(ball.getListOfCollision().size()>1){*/
+/*
+                else{
+
+                    /*}
+                }*/
+
+
+
+                ball.resetCollision();
+
+/*
+                for(Map.Entry<Wall,Integer> entry : ball.getListOfCollision().entrySet()){
+
+
+                }*/
+
+                /*
                     if(check == 5){
                         if(((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() < 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()>0)
                                 ||((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() > 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()>0)
@@ -122,22 +163,22 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                         }
                     }else{
 
-                        if(((int)(ball.getPosY() + ball.getmSpeedY()) <   heightScreen && (int)(ball.getPosY() + ball.getmSpeedY()) >0) && check!=4 && check != 2)
+                        if(((int)(ball.getPosY() + ball.getmSpeedY()) <   heightScreen -(ball.getHeight()/2) && (int)(ball.getPosY() + ball.getmSpeedY()) >0+ (ball.getHeight()/2)) && check!=4 && check != 2)
                             ball.setPosY((int) (ball.getPosY() + ball.getmSpeedY()));
                         else
                             ball.setPosY((int) (ball.getPosY()));
 
-                        if(((int) (ball.getPosX() - ball.getmSpeedX()) > 0 && (int) (ball.getPosX() - ball.getmSpeedX()) < widhtScreen) && check != 1 && check != 3)
+                        if(((int) (ball.getPosX() - ball.getmSpeedX()) > 0 + (ball.getHeight()/2) && (int) (ball.getPosX() - ball.getmSpeedX()) < widhtScreen - (ball.getHeight()/2)) && check != 1 && check != 3)
                             ball.setPosX((int) (ball.getPosX() - ball.getmSpeedX()));
                         else
                             ball.setPosX((int) (ball.getPosX()));
-                    }
+                    }*/
 
-            game.run(ball.getPosX(),ball.getPosY());
-            if(game.checkHole(ball.getPosX(),ball.getPosY())){
-                Log.d("Test", "YOU LOOSE");
+            game.run(ball.getPosX(),ball.getPosY(), heightScreen,widhtScreen, loose);
+            if(game.checkHole(ball.getPosX(),ball.getPosY()) && !loose){
+                mSensorManager.unregisterListener(this);loose = true;
+                game.run(ball.getPosX(), ball.getPosY(), heightScreen, widhtScreen, loose);
             }
-        }
     }
 
 

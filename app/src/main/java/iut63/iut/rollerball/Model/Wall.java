@@ -102,8 +102,8 @@ public class Wall extends Component {
     public Wall(int posX, int posY,int widht,int height, Bitmap myRepresentation){
         super.setPosX(posX);
         super.setPosY(posY);
-        super.setHeight(height);
-        super.setWidht(widht);
+        super.setHeight(myRepresentation.getHeight());
+        super.setWidht(myRepresentation.getWidth());
         super.setMyRepresentation(myRepresentation);
         cercle1X = posX;
         cercle1Y = posY;
