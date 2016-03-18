@@ -64,13 +64,11 @@ public class Ball extends Component{
     public Map<Wall, Integer> listOfCollision = new HashMap<>();;
     public Map<Wall, Integer> getListOfCollision() {return listOfCollision;}
 
-    public Ball(int id,int posX, int posY, Bitmap myRepresentation, int PosMaxX, int PosMaxY){
+    public Ball(int id,int posX, int posY, Bitmap myRepresentation){
         setPosX(posX);
         setPosY(posY);
         centerX = posX + 17 ;
         centerY = posY + 17;
-        posMaxX = PosMaxX;
-        posMaxY = PosMaxY;
         setHeight((int) myRepresentation.getHeight());
         setMyRepresentation(myRepresentation);
         mSpeedX = 0;
