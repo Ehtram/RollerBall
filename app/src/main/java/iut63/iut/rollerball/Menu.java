@@ -1,7 +1,12 @@
 package iut63.iut.rollerball;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.nfc.Tag;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -11,16 +16,19 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.drive.Drive;
+import com.google.android.gms.games.Game;
 import com.google.android.gms.games.Games;
 
-public class Menu extends FragmentActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
+public class Menu extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
     private Button start;
     private Button leaderboard;
     private GoogleApiClient mGoogleApiClient;
-    private boolean mSignInClicked;
+    private static String TAG = Menu.class.getSimpleName();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,34 +52,15 @@ public class Menu extends FragmentActivity implements GoogleApiClient.OnConnecti
         findViewById(R.id.sign_out_button).setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.sign_in_button) {
-            // start the asynchronous sign in flow
-            mSignInClicked = true;
-            mGoogleApiClient.connect();
-            Log.d("googleAPI", String.valueOf(mGoogleApiClient.isConnected()));
-        }
-        else if (v.getId() == R.id.sign_out_button) {
-            // sign out.
-            mSignInClicked = false;
-            Games.signOut(mGoogleApiClient);
 
-            // show sign-in button, hide the sign-out button
-            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-            findViewById(R.id.sign_out_button).setVisibility(View.GONE);
-        }
-    }
 
     private void setGoogleApiClient(){
-        // Create a GoogleApiClient instance
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this /* FragmentActivity */,
                         this /* OnConnectionFailedListener */)
                 .addApi(Games.API)
                 .addScope(Games.SCOPE_GAMES)
                 .build();
-
     }
 
     private void setLeaderboardOnClickListener() {
@@ -85,9 +74,14 @@ public class Menu extends FragmentActivity implements GoogleApiClient.OnConnecti
         });
     }
 
+
     @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-        Log.d("googleAPI",connectionResult.toString());
+    public void onClick(View v) {
+
     }
 
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        Log.d(TAG,"Erreur Inrésolvable"+ String.valueOf(connectionResult));
+    }
 }
