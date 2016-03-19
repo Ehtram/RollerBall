@@ -104,6 +104,7 @@ public abstract class Level {
         else if(holeFall instanceof Loser){
 
             float size = p.measureText("You Loose");
+            c.drawARGB(180,0,0,0);
             c.drawText("You Loose", widhtScreen / 2 - (size / 2), heightScreen / 4, p);
             ret = -1;
         }else{
