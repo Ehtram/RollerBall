@@ -8,7 +8,8 @@ import android.widget.Button;
 
 public class Menu extends AppCompatActivity {
 
-    Button start;
+    private Button start;
+    private Button leaderboard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,5 +23,14 @@ public class Menu extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        leaderboard = (Button) findViewById(R.id.buttonLeaderboard);
+        leaderboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mIntent = new Intent(Menu.this,LeaderboardDisplay.class);
+                startActivity(mIntent);
+            }
+        });
+
     }
 }

@@ -17,4 +17,5 @@
     <string name="retry">Retry</string>
     <string name="next">Next</string>
     <string name="back">back</string>
+    <string name="score">Leaderboard</string>
 </resources>
