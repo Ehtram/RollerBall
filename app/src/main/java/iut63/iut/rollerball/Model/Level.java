@@ -7,6 +7,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.hardware.SensorManager;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -20,12 +22,37 @@ import iut63.iut.rollerball.R;
 /**
  * Created by Cedric on 18/03/2016.
  */
-public abstract class Level {
+public class Level {
 
     private String name;
+
+    protected Level(Parcel in) {
+        name = in.readString();
+        unlock = in.readByte() != 0;
+        heightScreen = in.readInt();
+        widhtScreen = in.readInt();
+        wallRepresentationHor = in.readParcelable(Bitmap.class.getClassLoader());
+        wallRepresentationVert = in.readParcelable(Bitmap.class.getClassLoader());
+        hole = in.readParcelable(Bitmap.class.getClassLoader());
+        winner = in.readParcelable(Bitmap.class.getClassLoader());
+        background = in.readParcelable(Bitmap.class.getClassLoader());
+        hypothenus = in.readDouble();
+        ratio = in.readFloat();
+    }
+
+
     public String getName() {return name;}
 
     private boolean unlock = false;
+
+    public boolean getUnlock() {
+        return unlock;
+    }
+
+    public void setUnlock(boolean unlock) {
+        this.unlock = unlock;
+    }
+
     public void setName(String name) {this.name = name;}
 
     private Ball myBalle;
@@ -69,7 +96,6 @@ public abstract class Level {
         hole = BitmapFactory.decodeResource(context.getResources(), R.mipmap.hole);
         winner = BitmapFactory.decodeResource(context.getResources(), R.mipmap.winner);
         hypothenus = Math.sqrt(Math.pow((int) heightScreen, 2) + Math.pow((int) widhtScreen, 2));
-        // ball.setMyRepresentation(ballImage);
         ratio = (float) (hypothenus / 34.0f);
         if (heightScreen > widhtScreen)
             background = BitmapFactory.decodeResource(context.getResources(), R.mipmap.backgroundvert);
@@ -418,7 +444,7 @@ public abstract class Level {
         difX = (int) x - ((Wall) w).getCercle4X();
         difY = (int) y - ((Wall) w).getCercle4Y();
         if(Math.sqrt(difX * difX + difY * difY) < ball.getMyRepresentation().getHeight()/2){
-            ball.addNewCollision(7, (Wall)w);
+            ball.addNewCollision(7, (Wall) w);
             ball.setWallCollision((Wall) w);
         }
     }

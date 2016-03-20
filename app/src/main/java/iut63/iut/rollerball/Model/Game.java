@@ -1,6 +1,8 @@
 package iut63.iut.rollerball.Model;
 import android.hardware.SensorEvent;
 import android.hardware.SensorManager;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.os.Vibrator;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -28,7 +30,6 @@ public class Game{
 
 
     private double hypothenus;
-
     public double getHypothenus() {
         return hypothenus;
     }
@@ -43,11 +44,11 @@ public class Game{
 
         ball = new Ball(1, 80, 80, BitmapFactory.decodeResource(context.getResources(), R.mipmap.ball));
         addNewLevel(new Level1("1",context,surfaceView,widhtScreen,heightScreen,ball));
-
+        addNewLevel(new Level2("2", context, surfaceView, widhtScreen, heightScreen, ball));
     }
     public Ball getBall(){return ball;}
 
-    public void addNewLevel(Level1 level){
+    public void addNewLevel(Level level) {
         if(levelList == null){
             levelList = new ArrayList<>();
         }
@@ -56,11 +57,6 @@ public class Game{
 
     private void draw(float x, float y){
     }
-
-
-
-
-
 
 
 

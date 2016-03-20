@@ -16,7 +16,7 @@ public class Level1 extends Level {
 
     public Level1(String Name,Context context,SurfaceView surfaceView, int WidhtScreen, int HeightScreen, Ball ball){
         super(Name, context, surfaceView, HeightScreen, WidhtScreen, ball);
-
+        setUnlock(true);
 
         addNewComponent(new Wall(WidhtScreen / 2, HeightScreen / 2, wallRepresentationVert.getWidth(), wallRepresentationVert.getHeight(), wallRepresentationVert));
         addNewComponent(new Wall(WidhtScreen / 2, HeightScreen / 2 - wallRepresentationVert.getHeight(), wallRepresentationVert.getWidth(), wallRepresentationVert.getHeight(), wallRepresentationVert));
