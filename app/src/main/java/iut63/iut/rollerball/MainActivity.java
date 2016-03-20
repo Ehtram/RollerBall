@@ -22,6 +22,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.games.Games;
+
 import java.util.Map;
 
 import iut63.iut.rollerball.Model.Ball;
@@ -113,6 +115,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             retry.setVisibility(View.VISIBLE);
             back.setVisibility(View.VISIBLE);
             next.setVisibility(View.VISIBLE);
+//            if (Menu.getApiClient().isConnected()) {
+//                Games.Leaderboards.submitScore(Menu.getApiClient(), String.valueOf(R.string.leaderboard_id), 1337);
+//            }
+//            else{
+//                Menu.getApiClient().connect();
+//                Games.Leaderboards.submitScore(Menu.getApiClient(), String.valueOf(R.string.leaderboard_id), 1337);
+//            }
         }else if(fall == -1){
             retry.setVisibility(View.VISIBLE);
             back.setVisibility(View.VISIBLE);
