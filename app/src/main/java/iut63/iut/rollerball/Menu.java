@@ -17,7 +17,7 @@ public class Menu extends AppCompatActivity implements View.OnClickListener,Goog
 
     private Button start;
     private Button leaderboard;
-    private GoogleApiClient mGoogleApiClient;
+    private static  GoogleApiClient mGoogleApiClient;
     private static String TAG = Menu.class.getSimpleName();
     private static final int RC_SIGN_IN = 9001;
     private boolean mResolvingConnectionFailure = false;
@@ -41,6 +41,9 @@ public class Menu extends AppCompatActivity implements View.OnClickListener,Goog
         setLeaderboardOnClickListener();
         setGoogleApiClient();
         setGoogleSignButton();
+
+        if (mGoogleApiClient.isConnected())
+            Games.Leaderboards.submitScore(mGoogleApiClient, String.valueOf(R.string.leaderboard_id), 1337);
     }
 
     @Override
@@ -52,8 +55,8 @@ public class Menu extends AppCompatActivity implements View.OnClickListener,Goog
 
     @Override
     protected void onStop() {
-        super.onStop();
         mGoogleApiClient.disconnect();
+        super.onStop();
     }
 
     @Override
@@ -127,8 +130,11 @@ public class Menu extends AppCompatActivity implements View.OnClickListener,Goog
         leaderboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient,
-                        String.valueOf(R.string.leaderboard_id)),9002 );
+//                startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient,
+//                        String.valueOf(R.string.leaderboard_id)),100 );
+                startActivityForResult(Games.Leaderboards.getLeaderboardIntent(
+                                mGoogleApiClient, getString(R.string.leaderboard_id)),
+                        2);
             }
         });
     }
