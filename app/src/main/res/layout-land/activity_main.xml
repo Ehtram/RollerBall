@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="iut63.iut.rollerball.MainActivity">
@@ -17,8 +17,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_gravity="center" >
-    </SurfaceView>
+        android:layout_gravity="center"></SurfaceView>
 
     <Button
         android:layout_width="wrap_content"
@@ -29,7 +28,9 @@
         android:textSize="@dimen/retryValue"
         android:textColor="#502424"
         android:visibility="invisible"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -40,7 +41,10 @@
         android:layout_gravity="right|center_vertical"
         android:textColor="#502424"
         android:visibility="invisible"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -51,7 +55,10 @@
         android:textSize="@dimen/retryValue"
         android:textColor="#502424"
         android:visibility="invisible"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -60,6 +67,9 @@
         android:visibility="visible"
         android:id="@+id/button"
         android:background="@android:color/transparent"
-        android:layout_gravity="center_horizontal|bottom" />
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
 
 </FrameLayout>

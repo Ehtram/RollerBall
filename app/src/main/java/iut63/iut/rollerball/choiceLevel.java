@@ -1,6 +1,8 @@
 package iut63.iut.rollerball;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
@@ -28,8 +30,8 @@ public class choiceLevel extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choice_level);
         tableLayout = (TableLayout) findViewById(R.id.tableLayout);
-        disableButton = BitmapFactory.decodeResource(this.getResources(), R.drawable.rayure);
-        enableButton = BitmapFactory.decodeResource(this.getResources(), R.drawable.tick);
+        disableButton = BitmapFactory.decodeResource(this.getResources(), R.mipmap.rayure);
+        enableButton = BitmapFactory.decodeResource(this.getResources(), R.mipmap.tick);
 
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -52,11 +54,12 @@ public class choiceLevel extends AppCompatActivity {
                 b = new Button(this);
                 b.setLayoutParams(new TableRow.LayoutParams((int)(ratio * 2.8), (int)(ratio * 3)));
                 b.setText(String.valueOf((j + 1) + (nbButtonPossible * i)));
-                b.setBackgroundResource(R.drawable.rayure);
+                b.setBackgroundResource(R.mipmap.rayure);
                 b.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(choiceLevel.this, MainActivity.class);
+                        Intent intent;
+                        intent = new Intent(choiceLevel.this, MainActivity.class);
                         intent.putExtra(EXTRA_CHOICE, ((Button) v).getText().toString());
                         startActivity(intent);
                     }
@@ -66,4 +69,6 @@ public class choiceLevel extends AppCompatActivity {
             tableLayout.addView(tr);
         }
     }
+
+
 }

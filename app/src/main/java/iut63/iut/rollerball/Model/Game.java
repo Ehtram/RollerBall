@@ -41,7 +41,7 @@ public class Game{
         widhtScreen = metrics.widthPixels;
         hypothenus = Math.sqrt(Math.pow((int) heightScreen, 2) + Math.pow((int) widhtScreen, 2));
 
-        ball = new Ball(1,80,80,BitmapFactory.decodeResource(context.getResources(), R.drawable.ball));
+        ball = new Ball(1, 80, 80, BitmapFactory.decodeResource(context.getResources(), R.mipmap.ball));
         addNewLevel(new Level1("1",context,surfaceView,widhtScreen,heightScreen,ball));
 
     }

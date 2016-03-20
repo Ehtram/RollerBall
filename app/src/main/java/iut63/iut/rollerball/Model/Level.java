@@ -6,9 +6,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorListener;
 import android.hardware.SensorManager;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -25,6 +24,8 @@ public abstract class Level {
 
     private String name;
     public String getName() {return name;}
+
+    private boolean unlock = false;
     public void setName(String name) {this.name = name;}
 
     private Ball myBalle;
@@ -48,8 +49,13 @@ public abstract class Level {
 
     private List<Component> listComponent = new ArrayList<>();
     private Bitmap background;
-
+    private double hypothenus;
     private Boolean loose =false;
+    private float ratio;
+
+    public float getRatio() {
+        return ratio;
+    }
     public Ball getBall(){return ball;}
     public void setBall(Ball ball){this.ball=ball;}
     public Level(String name,Context context, SurfaceView surfaceView,int HeightScreen, int WidhtScreen,Ball ball){
@@ -58,16 +64,16 @@ public abstract class Level {
         heightScreen = HeightScreen;
         widhtScreen = WidhtScreen;
         setBall(ball);
-        wallRepresentationHor = BitmapFactory.decodeResource(context.getResources(), R.drawable.wallsmallhor);
-        wallRepresentationVert = BitmapFactory.decodeResource(context.getResources(), R.drawable.wallvert);
-        hole = BitmapFactory.decodeResource(context.getResources(), R.drawable.hole);
-        winner = BitmapFactory.decodeResource(context.getResources(), R.drawable.winner);
-
+        wallRepresentationHor = BitmapFactory.decodeResource(context.getResources(), R.mipmap.wallsmallhor);
+        wallRepresentationVert = BitmapFactory.decodeResource(context.getResources(), R.mipmap.wallvert);
+        hole = BitmapFactory.decodeResource(context.getResources(), R.mipmap.hole);
+        winner = BitmapFactory.decodeResource(context.getResources(), R.mipmap.winner);
+        hypothenus = Math.sqrt(Math.pow((int) heightScreen, 2) + Math.pow((int) widhtScreen, 2));
         // ball.setMyRepresentation(ballImage);
-
-
-
-        background = BitmapFactory.decodeResource(context.getResources(), R.drawable.background);
+        ratio = (float) (hypothenus / 34.0f);
+        if (heightScreen > widhtScreen)
+            background = BitmapFactory.decodeResource(context.getResources(), R.mipmap.backgroundvert);
+        else background = BitmapFactory.decodeResource(context.getResources(), R.mipmap.background);
     }
 
     public void addNewComponent(Component c){
@@ -104,7 +110,7 @@ public abstract class Level {
         else if(holeFall instanceof Loser){
 
             float size = p.measureText("You Loose");
-            c.drawARGB(180,0,0,0);
+            c.drawARGB(180, 0, 0, 0);
             c.drawText("You Loose", widhtScreen / 2 - (size / 2), heightScreen / 4, p);
             ret = -1;
         }else{
