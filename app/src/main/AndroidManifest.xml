@@ -30,8 +30,6 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".choiceLevel" />
 
-        <activity android:name=".LeaderboardDisplay" />
-
     </application>
 
 </manifest>

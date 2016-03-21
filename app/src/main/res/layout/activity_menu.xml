@@ -30,7 +30,7 @@
         android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="30dp"
         android:layout_below="@+id/buttonLeaderboard"
         android:layout_centerHorizontal="true" />
 
@@ -40,5 +40,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Out"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:layout_below="@id/buttonLeaderboard"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>
