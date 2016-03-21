@@ -94,13 +94,16 @@ public class choiceLevel extends AppCompatActivity implements SensorEventListene
                 b.setText(String.valueOf((j + 1) + (nbButtonPossible * i)));
                 if (myListOfUnlock.size() >= ((j + 1) + (nbButtonPossible * i)) || ((j + 1) + (nbButtonPossible * i)) == 1) {
                     if (myListOfUnlock.size() != 0) {
-                        if (myListOfUnlock.get((j) + (nbButtonPossible * i)))
+                        if (myListOfUnlock.get((j) + (nbButtonPossible * i))){
                             b.setBackgroundResource(R.mipmap.tick);
+                            b.setEnabled(true);
+                        }
                         else b.setBackgroundResource(R.mipmap.rayure);
                     } else if (((j + 1) + (nbButtonPossible * i)) == 1) {
                         b.setBackgroundResource(R.mipmap.tick);
+                        b.setEnabled(false);
                     }
-                } else b.setBackgroundResource(R.mipmap.rayure);
+                } else {b.setBackgroundResource(R.mipmap.rayure);b.setEnabled(false);}
 
                 b.setOnClickListener(new View.OnClickListener() {
                     @Override

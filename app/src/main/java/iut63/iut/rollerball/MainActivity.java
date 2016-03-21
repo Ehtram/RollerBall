@@ -150,7 +150,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     private void unlockNextLevel(int level) {
-        game.getLevelList().get(level).setUnlock(true);
+        if(game.getLevelList().size()<level)
+            game.getLevelList().get(level).setUnlock(true);
     }
 
     private void addEventButton() {
