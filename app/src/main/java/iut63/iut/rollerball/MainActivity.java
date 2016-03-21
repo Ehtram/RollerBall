@@ -68,9 +68,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if (degrees == 0) {
             x = event.values[0];
             y = event.values[1];
-        } else {
+        } else if (degrees == 90) {
             x = -event.values[1];
             y = event.values[0];
+        }else if (degrees == 180) {
+            x = -event.values[0];
+            y = -event.values[1];
+        }
+        else{
+            x = event.values[1];
+            y = -event.values[0];
         }
         ball.setmSpeedX(ball.getmSpeedX() + x);
         if (ball.getmSpeedX() > 0.1 * ratio)
