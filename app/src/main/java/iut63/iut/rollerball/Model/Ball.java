@@ -1,12 +1,8 @@
 package iut63.iut.rollerball.Model;
 
 import android.graphics.Bitmap;
-import android.media.Image;
-import android.util.DisplayMetrics;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,8 +11,8 @@ import java.util.Map;
 public class Ball extends Component{
 
     private int id, posMaxX,posMaxY;
-    private float mSpeedX = 0;
-    private float mSpeedY = 0;
+    private float speedX = 0;
+    private float speedY = 0;
     private float surface ;
     private Wall wallCollision;
 
@@ -28,20 +24,20 @@ public class Ball extends Component{
         this.wallCollision = wallCollision;
     }
 
-    public float getmSpeedX() {
-        return mSpeedX;
+    public float getSpeedX() {
+        return speedX;
     }
 
-    public void setmSpeedX(float mSpeedX) {
-        this.mSpeedX = mSpeedX;
+    public void setSpeedX(float speedX) {
+        this.speedX = speedX;
     }
 
-    public float getmSpeedY() {
-        return mSpeedY;
+    public float getSpeedY() {
+        return speedY;
     }
 
-    public void setmSpeedY(float mSpeedY) {
-        this.mSpeedY = mSpeedY;
+    public void setSpeedY(float speedY) {
+        this.speedY = speedY;
     }
 
     public int getId() {return id;}
@@ -71,8 +67,8 @@ public class Ball extends Component{
         centerY = posY + 17;
         setHeight((int) myRepresentation.getHeight());
         setMyRepresentation(myRepresentation);
-        mSpeedX = 0;
-        mSpeedY = 0;
+        speedX = 0;
+        speedY = 0;
         surface =(float) Math.PI * 17*17;
     }
 

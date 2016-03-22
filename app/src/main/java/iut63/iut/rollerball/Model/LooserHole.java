@@ -9,8 +9,6 @@ import android.os.*;
  */
 public class LooserHole extends Hole {
 
-
-
     public LooserHole(int posX, int posY, Bitmap myRepresentation){
         setPosX(posX);
         setPosY(posY);

@@ -113,47 +113,6 @@ public class Wall extends Component {
         cercle3Y = posY+height;
         cercle4X = posX + widht;
         cercle4Y = posY + height;
-
-
-
-
-        /*
-        remplirGaucheSup(posX, posY);
-        remplirDroiteSup(posX, posY, widht);
-        remplirGaucheInf(posX, posY, height);
-        remplirDroiteInf(posX, posY, height,widht);
-        */
     }
 
-    /*
-    private void remplirGaucheSup(int posX, int posY){
-
-        for(int i = 90; i<180; i++){
-            xSupLeft.add((int) (posX + 17 * Math.cos(i)));
-            ySupLeft.add((int) (posY + 17 * Math.sin(i)));
-        }
-    }
-
-    private void remplirDroiteSup(int posX, int posY, int width){
-        for(int i = 0; i<90; i++){
-            xSupRight.add((int) (posX+width + 17 * Math.cos(i)));
-            ySupRight.add((int) (posY + 17 * Math.sin(i)));
-        }
-    }
-
-    private void remplirGaucheInf(int posX, int posY, int heigth){
-        for(int i = 180; i<270; i++){
-            xInfLeft.add((int) (posX + 17 * Math.cos(i)));
-            yInfLeft.add((int) (posY+heigth + 17 * Math.sin(i)));
-        }
-    }
-
-    private  void remplirDroiteInf(int posX, int posY, int height, int widht){
-        for(int i = 270; i<360; i++){
-            xInfRight.add((int) (posX+widht + 17 * Math.cos(i)));
-            yInfRight.add((int) (posY+height + 17 * Math.sin(i)));
-
-        }
-    }
-    */
 }

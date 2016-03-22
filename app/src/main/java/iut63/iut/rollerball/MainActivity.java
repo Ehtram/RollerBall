@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     /**
-     * Méthode appelé tous les "délais precedemmen définir"
+     * Méthode appelé tous les "délais précedemment défini"
      * @param event SensorEvent qui contient notamment les values du sensor
      */
     public void onSensorChanged (SensorEvent event){
@@ -92,17 +92,17 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             x = event.values[1];
             y = -event.values[0];
         }
-        ball.setmSpeedX(ball.getmSpeedX() + x);
-        if (ball.getmSpeedX() > 0.1 * ratio)
-            ball.setmSpeedX((float) (0.1 * ratio));
-        if (ball.getmSpeedX() < -0.1 * ratio)
-            ball.setmSpeedX((float) (-0.1 * ratio));
+        ball.setSpeedX(ball.getSpeedX() + x);
+        if (ball.getSpeedX() > 0.1 * ratio)
+            ball.setSpeedX((float) (0.1 * ratio));
+        if (ball.getSpeedX() < -0.1 * ratio)
+            ball.setSpeedX((float) (-0.1 * ratio));
 
-        ball.setmSpeedY(ball.getmSpeedY() + y);
-        if (ball.getmSpeedY() > 0.1 * ratio)
-            ball.setmSpeedY((float) (0.1 * ratio));
-        if (ball.getmSpeedY() < -0.1 * ratio)
-            ball.setmSpeedY((float) (-0.1 * ratio));
+        ball.setSpeedY(ball.getSpeedY() + y);
+        if (ball.getSpeedY() > 0.1 * ratio)
+            ball.setSpeedY((float) (0.1 * ratio));
+        if (ball.getSpeedY() < -0.1 * ratio)
+            ball.setSpeedY((float) (-0.1 * ratio));
 
         fall = game.getLevelList().get(levelChoice - 1).checkWin(mSensorManager, this);
         if (fall == 1) {

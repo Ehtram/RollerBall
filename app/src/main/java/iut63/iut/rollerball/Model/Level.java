@@ -464,24 +464,24 @@ public class Level {
     }
 
     public int checkWin(SensorManager mSensorManager, MainActivity mainActivity){
-        checkCollision(ball.getPosX() - ball.getmSpeedX(), ball.getPosY() + ball.getmSpeedY());
+        checkCollision(ball.getPosX() - ball.getSpeedX(), ball.getPosY() + ball.getSpeedY());
 
         if(ball.getListOfCollision().size()==1 || ball.getListOfCollision().size()==0){
 
-            if(((int)(ball.getPosY() + ball.getmSpeedY()) <   heightScreen -(ball.getHeight()/2) && (int)(ball.getPosY() + ball.getmSpeedY()) >0+ (ball.getHeight()/2)) && !(ball.getListOfCollision().containsValue(4)) && !(ball.getListOfCollision().containsValue(2)))
-                ball.setPosY((int) (ball.getPosY() + ball.getmSpeedY()));
+            if(((int)(ball.getPosY() + ball.getSpeedY()) <   heightScreen -(ball.getHeight()/2) && (int)(ball.getPosY() + ball.getSpeedY()) >0+ (ball.getHeight()/2)) && !(ball.getListOfCollision().containsValue(4)) && !(ball.getListOfCollision().containsValue(2)))
+                ball.setPosY((int) (ball.getPosY() + ball.getSpeedY()));
             else
                 ball.setPosY((int) (ball.getPosY()));
 
-            if(((int) (ball.getPosX() - ball.getmSpeedX()) > 0 + (ball.getHeight()/2) && (int) (ball.getPosX() - ball.getmSpeedX()) < widhtScreen - (ball.getHeight()/2)) && !(ball.getListOfCollision().containsValue(1)) && !(ball.getListOfCollision().containsValue(3)))
-                ball.setPosX((int) (ball.getPosX() - ball.getmSpeedX()));
+            if(((int) (ball.getPosX() - ball.getSpeedX()) > 0 + (ball.getHeight()/2) && (int) (ball.getPosX() - ball.getSpeedX()) < widhtScreen - (ball.getHeight()/2)) && !(ball.getListOfCollision().containsValue(1)) && !(ball.getListOfCollision().containsValue(3)))
+                ball.setPosX((int) (ball.getPosX() - ball.getSpeedX()));
             else
                 ball.setPosX((int) (ball.getPosX()));
     /*
                         if(ball.getListOfCollision().containsValue(5) || ball.getListOfCollision().containsValue(6)||ball.getListOfCollision().containsValue(7)||ball.getListOfCollision().containsValue(8)){
                             Wall w = ball.getWallCollision();
                             rayon = (float) Math.sqrt(Math.pow((w.getCercle1X()-ball.getPosX()),2)+ Math.pow((w.getCercle1Y()-ball.getPosY()),2));
-                            angular = (float) Math.acos(((ball.getPosX() - ball.getmSpeedX()) - w.getCercle1X()) / rayon);
+                            angular = (float) Math.acos(((ball.getPosX() - ball.getSpeedX()) - w.getCercle1X()) / rayon);
                             newX = (float) (w.getCercle1X() - ball.getMyRepresentation().getHeight()/2 * Math.cos(angular));
                             newY = (float) (w.getCercle1Y() + ball.getMyRepresentation().getHeight()/2 * Math.sin(angular));
                             ball.setPosX((int) newX);
@@ -506,51 +506,51 @@ public class Level {
 
                     /*
                         if(check == 5){
-                            if(((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() < 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()>0)
-                                    ||((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() > 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()>0)
-                                    ||((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() < 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()<0)
+                            if(((ball.getPosX() - ball.getSpeedX()) -ball.getPosX() < 0 &&  ball.getPosY() + ball.getSpeedY() - ball.getPosY()>0)
+                                    ||((ball.getPosX() - ball.getSpeedX()) -ball.getPosX() > 0 &&  ball.getPosY() + ball.getSpeedY() - ball.getPosY()>0)
+                                    ||((ball.getPosX() - ball.getSpeedX()) -ball.getPosX() < 0 &&  ball.getPosY() + ball.getSpeedY() - ball.getPosY()<0)
                                     ){
-                                    ball.setPosY((int) (ball.getPosY() + ball.getmSpeedY()));
-                                    ball.setPosX((int) (ball.getPosX() - ball.getmSpeedX()));
+                                    ball.setPosY((int) (ball.getPosY() + ball.getSpeedY()));
+                                    ball.setPosX((int) (ball.getPosX() - ball.getSpeedX()));
 
                             }
                         }else if(check == 6){
-                            if(((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() > 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()>0)
-                                    ||((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() < 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()>0)
-                                    ||((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() > 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()<0)
+                            if(((ball.getPosX() - ball.getSpeedX()) -ball.getPosX() > 0 &&  ball.getPosY() + ball.getSpeedY() - ball.getPosY()>0)
+                                    ||((ball.getPosX() - ball.getSpeedX()) -ball.getPosX() < 0 &&  ball.getPosY() + ball.getSpeedY() - ball.getPosY()>0)
+                                    ||((ball.getPosX() - ball.getSpeedX()) -ball.getPosX() > 0 &&  ball.getPosY() + ball.getSpeedY() - ball.getPosY()<0)
                                     )
                             {
-                                ball.setPosY((int) (ball.getPosY() + ball.getmSpeedY()));
-                                ball.setPosX((int) (ball.getPosX() - ball.getmSpeedX()));
+                                ball.setPosY((int) (ball.getPosY() + ball.getSpeedY()));
+                                ball.setPosX((int) (ball.getPosX() - ball.getSpeedX()));
                             }
                         }else if(check == 7){
-                            if(((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() > 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()<0)
-                                    ||((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() > 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()>0)
-                                    ||((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() < 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()<0)
+                            if(((ball.getPosX() - ball.getSpeedX()) -ball.getPosX() > 0 &&  ball.getPosY() + ball.getSpeedY() - ball.getPosY()<0)
+                                    ||((ball.getPosX() - ball.getSpeedX()) -ball.getPosX() > 0 &&  ball.getPosY() + ball.getSpeedY() - ball.getPosY()>0)
+                                    ||((ball.getPosX() - ball.getSpeedX()) -ball.getPosX() < 0 &&  ball.getPosY() + ball.getSpeedY() - ball.getPosY()<0)
                                     )
                             {
-                                ball.setPosY((int) (ball.getPosY() + ball.getmSpeedY()));
-                                ball.setPosX((int) (ball.getPosX() - ball.getmSpeedX()));
+                                ball.setPosY((int) (ball.getPosY() + ball.getSpeedY()));
+                                ball.setPosX((int) (ball.getPosX() - ball.getSpeedX()));
                             }
 
                         }else if(check ==8 ){
-                            if(((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() < 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()<0)
-                                    ||((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() < 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()>0)
-                                    ||((ball.getPosX() - ball.getmSpeedX()) -ball.getPosX() > 0 &&  ball.getPosY() + ball.getmSpeedY() - ball.getPosY()<0)
+                            if(((ball.getPosX() - ball.getSpeedX()) -ball.getPosX() < 0 &&  ball.getPosY() + ball.getSpeedY() - ball.getPosY()<0)
+                                    ||((ball.getPosX() - ball.getSpeedX()) -ball.getPosX() < 0 &&  ball.getPosY() + ball.getSpeedY() - ball.getPosY()>0)
+                                    ||((ball.getPosX() - ball.getSpeedX()) -ball.getPosX() > 0 &&  ball.getPosY() + ball.getSpeedY() - ball.getPosY()<0)
                                     )
                             {
-                                ball.setPosY((int) (ball.getPosY() + ball.getmSpeedY()));
-                                ball.setPosX((int) (ball.getPosX() - ball.getmSpeedX()));
+                                ball.setPosY((int) (ball.getPosY() + ball.getSpeedY()));
+                                ball.setPosX((int) (ball.getPosX() - ball.getSpeedX()));
                             }
                         }else{
 
-                            if(((int)(ball.getPosY() + ball.getmSpeedY()) <   heightScreen -(ball.getHeight()/2) && (int)(ball.getPosY() + ball.getmSpeedY()) >0+ (ball.getHeight()/2)) && check!=4 && check != 2)
-                                ball.setPosY((int) (ball.getPosY() + ball.getmSpeedY()));
+                            if(((int)(ball.getPosY() + ball.getSpeedY()) <   heightScreen -(ball.getHeight()/2) && (int)(ball.getPosY() + ball.getSpeedY()) >0+ (ball.getHeight()/2)) && check!=4 && check != 2)
+                                ball.setPosY((int) (ball.getPosY() + ball.getSpeedY()));
                             else
                                 ball.setPosY((int) (ball.getPosY()));
 
-                            if(((int) (ball.getPosX() - ball.getmSpeedX()) > 0 + (ball.getHeight()/2) && (int) (ball.getPosX() - ball.getmSpeedX()) < widhtScreen - (ball.getHeight()/2)) && check != 1 && check != 3)
-                                ball.setPosX((int) (ball.getPosX() - ball.getmSpeedX()));
+                            if(((int) (ball.getPosX() - ball.getSpeedX()) > 0 + (ball.getHeight()/2) && (int) (ball.getPosX() - ball.getSpeedX()) < widhtScreen - (ball.getHeight()/2)) && check != 1 && check != 3)
+                                ball.setPosX((int) (ball.getPosX() - ball.getSpeedX()));
                             else
                                 ball.setPosX((int) (ball.getPosX()));
                         }*/

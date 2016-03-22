@@ -11,6 +11,7 @@ public class Plateau {
     private List<Component> myComponent;
 
     public List<Component> getMyComponent() {return myComponent;}
+
     public void setMyComponent(List<Component> myComponent) {this.myComponent = myComponent;}
 
     public Plateau(){

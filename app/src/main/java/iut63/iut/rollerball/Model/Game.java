@@ -28,6 +28,7 @@ public class Game{
     }
 
     public List<Level> getLevelList(){return levelList;}
+
     public Game(Context context, SurfaceView surfaceView,DisplayMetrics metrics, SensorManager mSensorManager){
         levelList = new ArrayList<>();
         player1 = new Player("toto");
