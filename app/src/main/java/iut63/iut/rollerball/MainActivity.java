@@ -7,7 +7,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.PersistableBundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,10 +15,6 @@ import android.view.Surface;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
-
-import java.io.FileOutputStream;
-import java.util.HashMap;
-import java.util.Map;
 
 import iut63.iut.rollerball.Model.Ball;
 import iut63.iut.rollerball.Model.Game;
@@ -38,9 +33,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        retry = (Button) findViewById(R.id.retry);
-        back = (Button) findViewById(R.id.back);
-        next = (Button) findViewById(R.id.next);
+        setButton();
 
         addEventButton();
 
@@ -48,10 +41,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if(intent != null)
             levelChoice =  Integer.valueOf(intent.getStringExtra(EXTRA_CHOICE)).intValue();
 
-        Sensor mSensor;
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_GAME);
+        setSensorManager();
 
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -60,7 +50,30 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         ratio = (float) (game.getHypothenus() / 34.0f);
     }
 
+    /**
+     * Récupere un sensor Manager et lui ajoute un listener sur l'accélèrometre.
+     * Et fixe a fréquence à la quelle nous voulons recevoir des données ici SENSOR_DELAY_GAME
+     */
+    private void setSensorManager() {
+        Sensor mSensor;
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_GAME);
+    }
 
+    /**
+     * Initialise les attributs retry back et next avec les boutons correspondant
+     */
+    private void setButton() {
+        retry = (Button) findViewById(R.id.retry);
+        back = (Button) findViewById(R.id.back);
+        next = (Button) findViewById(R.id.next);
+    }
+
+    /**
+     * Méthode appelé tous les "délais precedemmen définir"
+     * @param event SensorEvent qui contient notamment les values du sensor
+     */
     public void onSensorChanged (SensorEvent event){
 
         Ball ball = game.getBall();
@@ -94,30 +107,28 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         fall = game.getLevelList().get(levelChoice - 1).checkWin(mSensorManager, this);
         if (fall == 1) {
             unlockNextLevel(levelChoice);
-            saveArray();
+            saveGameData();
         }
         affichage(fall);
         //deleteAllSharedPref();
     }
 
-
+    /**
+     * Appelé lorsque la précision du sensor change.
+     * Non utilisé dans notre cas
+     * @param sensor le sensor
+     * @param accuracy sa précision
+     */
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-    }
-
-
-
+    /**
+     * Affichage de fin de level
+     * @param fall permet de savoir si l'utilisateur est tombé dans le bon trou ou non,
+     *             et donc de régler l'affichage en conséquence
+     */
     private void affichage(int fall){
         if(fall==1){
             retry.setVisibility(View.VISIBLE);
@@ -129,6 +140,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
     }
 
+    /**
+     * Classic onResume méthode,
+     * sauf qu'ici on gère la rotation de l'écran et récupérant la rotation de la SurfaceView
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -149,10 +164,17 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
     }
 
+    /**
+     * Méthode de déblocage du prochain niveau
+     * @param level le niveau a débloqué
+     */
     private void unlockNextLevel(int level) {
         game.getLevelList().get(level).setUnlock(true);
     }
 
+    /**
+     * Ajoute les listener sur les boutons retry back et next
+     */
     private void addEventButton() {
         retry.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,7 +199,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         });
     }
 
-    private boolean saveArray() {
+    /**
+     * Sauvegarde la progression du joueur dans les SharedPreferences
+     * @return true si la sauvegarde a pu être éffectué
+     */
+    private boolean saveGameData() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor mEdit1 = sp.edit();
         mEdit1.putInt("Status_size", game.getLevelList().size()); /* sKey is an array */
@@ -189,6 +215,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         return mEdit1.commit();
     }
 
+    /**
+     * Méthode de suppression des SharedPreferences.
+     * Non utilisé pour le moment
+     * @return true si la suppression a pu se faire.
+     */
     private boolean deleteAllSharedPref() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor mEdit1 = sp.edit();

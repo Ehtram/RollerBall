@@ -21,7 +21,7 @@ public class Menu extends BaseGameActivity implements View.OnClickListener {
 
     /**
      * Méthode appelée à chaque création de l'activité
-     * @param savedInstanceState
+     * @param savedInstanceState le Bundle
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

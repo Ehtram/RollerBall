@@ -1,9 +1,6 @@
 package iut63.iut.rollerball.Model;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.view.SurfaceView;
 
 /**
@@ -25,8 +22,8 @@ public class Level1 extends Level {
 
         addNewComponent(new Wall(0, HeightScreen / 2, wallRepresentationHor.getWidth(), wallRepresentationHor.getHeight(), wallRepresentationHor));
         addNewComponent(new Wall(wallRepresentationHor.getWidth() - wallRepresentationVert.getWidth(), HeightScreen / 2 + wallRepresentationHor.getHeight(), wallRepresentationVert.getWidth(), wallRepresentationVert.getHeight(), wallRepresentationVert));
-        addNewComponent(new Loser(wallRepresentationHor.getWidth() - wallRepresentationVert.getWidth(), HeightScreen / 2 + wallRepresentationHor.getHeight() + wallRepresentationVert.getHeight(), hole));
-        addNewComponent(new Winner(0, HeightScreen / 2 + wallRepresentationHor.getHeight(), winner));
+        addNewComponent(new LooserHole(wallRepresentationHor.getWidth() - wallRepresentationVert.getWidth(), HeightScreen / 2 + wallRepresentationHor.getHeight() + wallRepresentationVert.getHeight(), hole));
+        addNewComponent(new WinnerHole(0, HeightScreen / 2 + wallRepresentationHor.getHeight(), winner));
 /*
         //addNewComponent(new Wall(200, 80, wallRepresentationHor.getWidth(), wallRepresentationHor.getHeight(), wallRepresentationHor));
 
@@ -34,12 +31,12 @@ public class Level1 extends Level {
 
         addNewComponent(new Wall(WidhtScreen / 2 - wallRepresentationHor.getWidth() - wallRepresentationVert.getWidth(), HeightScreen / 2  , wallRepresentationHor.getWidth(), wallRepresentationHor.getHeight(), wallRepresentationHor));
         addNewComponent(new Wall(WidhtScreen / 2 - wallRepresentationHor.getWidth()*2 - wallRepresentationVert.getWidth(), HeightScreen / 2  , wallRepresentationHor.getWidth(), wallRepresentationHor.getHeight(), wallRepresentationHor));
-        addNewComponent(new Loser(WidhtScreen / 2, HeightScreen / 2 - hole.getHeight(), hole));
-        addNewComponent(new Loser(WidhtScreen / 2 - wallRepresentationVert.getWidth() - hole.getHeight(), HeightScreen / 2 - hole.getHeight(), hole));
-        addNewComponent(new Loser(WidhtScreen / 2 - wallRepresentationVert.getWidth() - hole.getHeight(), HeightScreen / 2 + hole.getHeight(), hole));
-        addNewComponent(new Loser(WidhtScreen / 2 - hole.getHeight(), HeightScreen / 2 + 3*hole.getHeight(), hole));
-        addNewComponent(new Loser(WidhtScreen / 2 - wallRepresentationVert.getWidth()-wallRepresentationHor.getWidth(), HeightScreen / 2 + hole.getHeight(), hole));
-        addNewComponent(new Winner(WidhtScreen / 2 - wallRepresentationHor.getWidth()*2, HeightScreen / 2 + winner.getHeight()*3, winner));
+        addNewComponent(new LooserHole(WidhtScreen / 2, HeightScreen / 2 - hole.getHeight(), hole));
+        addNewComponent(new LooserHole(WidhtScreen / 2 - wallRepresentationVert.getWidth() - hole.getHeight(), HeightScreen / 2 - hole.getHeight(), hole));
+        addNewComponent(new LooserHole(WidhtScreen / 2 - wallRepresentationVert.getWidth() - hole.getHeight(), HeightScreen / 2 + hole.getHeight(), hole));
+        addNewComponent(new LooserHole(WidhtScreen / 2 - hole.getHeight(), HeightScreen / 2 + 3*hole.getHeight(), hole));
+        addNewComponent(new LooserHole(WidhtScreen / 2 - wallRepresentationVert.getWidth()-wallRepresentationHor.getWidth(), HeightScreen / 2 + hole.getHeight(), hole));
+        addNewComponent(new WinnerHole(WidhtScreen / 2 - wallRepresentationHor.getWidth()*2, HeightScreen / 2 + winner.getHeight()*3, winner));
        addNewComponent(new Wall(WidhtScreen / 2, 0, wallRepresentationVert.getWidth(), wallRepresentationVert.getHeight(), wallRepresentationVert));
         addNewComponent(new Wall(WidhtScreen / 2 + wallRepresentationVert.getHeight(), 0, wallRepresentationVert.getWidth(), wallRepresentationVert.getHeight(), wallRepresentationVert));
         addNewComponent(new Wall(WidhtScreen / 2 + wallRepresentationVert.getHeight()*2, 0, wallRepresentationVert.getWidth(), wallRepresentationVert.getHeight(), wallRepresentationVert));
@@ -47,13 +44,13 @@ public class Level1 extends Level {
 
 
         //  addNewComponent(new Wall(WidhtScreen / 2, HeightScreen / 2 + wallRepresentationVert.getHeight() + hole.getHeight() + getBall().getMyRepresentation().getHeight() * 2, wallRepresentationVert.getWidth(), wallRepresentationVert.getHeight(), wallRepresentationVert));
-        // addNewComponent(new Loser(WidhtScreen / 2, HeightScreen / 2 + wallRepresentationVert.getHeight(), hole));
-        //addNewComponent(new Loser(WidhtScreen / 2 + wallRepresentationVert.getWidth(), HeightScreen / 2 + wallRepresentationVert.getHeight() + hole.getHeight(), hole));
+        // addNewComponent(new LooserHole(WidhtScreen / 2, HeightScreen / 2 + wallRepresentationVert.getHeight(), hole));
+        //addNewComponent(new LooserHole(WidhtScreen / 2 + wallRepresentationVert.getWidth(), HeightScreen / 2 + wallRepresentationVert.getHeight() + hole.getHeight(), hole));
         //listOfWall.add(new Wall(WidhtScreen/2 +115,HeightScreen/2 + wallRepresentationHor.getWidth(),wallRepresentationHor.getWidth(),wallRepresentationHor.getHeight(), wallRepresentationHor));
         //addNewComponent(new Wall(WidhtScreen / 2 - wallRepresentationHor.getWidth(), HeightScreen / 2, wallRepresentationHor.getWidth(), wallRepresentationHor.getHeight(), wallRepresentationHor));
         //addNewComponent(new Wall(WidhtScreen / 2 - 2 * wallRepresentationHor.getWidth(), HeightScreen / 2, wallRepresentationHor.getWidth(), wallRepresentationHor.getHeight(), wallRepresentationHor));
         //
-        //listOfWall.add(new Loser(0,0,hole));
+        //listOfWall.add(new LooserHole(0,0,hole));
 
     }
 

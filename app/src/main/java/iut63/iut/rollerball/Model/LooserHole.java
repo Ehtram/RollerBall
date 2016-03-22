@@ -7,11 +7,11 @@ import android.os.*;
 /**
  * Created by Cedric on 04/03/2016.
  */
-public class Loser extends Hole {
+public class LooserHole extends Hole {
 
 
 
-    public Loser(int posX, int posY, Bitmap myRepresentation){
+    public LooserHole(int posX, int posY, Bitmap myRepresentation){
         setPosX(posX);
         setPosY(posY);
         setCenterX(posX + myRepresentation.getWidth()/2);

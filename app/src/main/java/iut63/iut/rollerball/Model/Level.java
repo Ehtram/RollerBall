@@ -8,8 +8,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.hardware.SensorManager;
 import android.os.Parcel;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -133,7 +131,7 @@ public class Level {
         if(!loose){
             c.drawBitmap(getBall().getMyRepresentation(), x - (getBall().getMyRepresentation().getWidth() / 2), y - (getBall().getMyRepresentation().getHeight() / 2), null);
         }
-        else if(holeFall instanceof Loser){
+        else if(holeFall instanceof LooserHole){
 
             float size = p.measureText("You Loose");
             c.drawARGB(180, 0, 0, 0);

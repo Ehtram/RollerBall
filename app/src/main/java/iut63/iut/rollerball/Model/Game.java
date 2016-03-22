@@ -1,15 +1,8 @@
 package iut63.iut.rollerball.Model;
-import android.hardware.SensorEvent;
 import android.hardware.SensorManager;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.os.Vibrator;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.util.DisplayMetrics;
-import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.util.ArrayList;
@@ -44,7 +37,7 @@ public class Game{
 
         ball = new Ball(1, 80, 80, BitmapFactory.decodeResource(context.getResources(), R.mipmap.ball));
         addNewLevel(new Level1("1",context,surfaceView,widhtScreen,heightScreen,ball));
-        addNewLevel(new Level2("2", context, surfaceView, widhtScreen, heightScreen, ball));
+        addNewLevel(new level2("2", context, surfaceView, widhtScreen, heightScreen, ball));
     }
     public Ball getBall(){return ball;}
 

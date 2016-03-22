@@ -3,20 +3,15 @@ package iut63.iut.rollerball;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -25,8 +20,9 @@ import android.widget.TableRow;
 import java.util.ArrayList;
 import java.util.List;
 
-import iut63.iut.rollerball.Model.Game;
-
+/**
+ * Classe de choix du level
+ */
 public class choiceLevel extends AppCompatActivity implements SensorEventListener {
 
     final String EXTRA_CHOICE = "choiceLevel";
@@ -36,12 +32,17 @@ public class choiceLevel extends AppCompatActivity implements SensorEventListene
     private Bitmap disableButton, enableButton;
     private List<Boolean> myListOfUnlock = new ArrayList<>();
     private int ratio;
+
+    /**
+     * Set the view, Charge les données et affiche les boutons d'accés aux levels
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choice_level);
 
-        loadArray(this);
+        loadGameData(this);
 
         tableLayout = (TableLayout) findViewById(R.id.tableLayout);
         disableButton = BitmapFactory.decodeResource(this.getResources(), R.mipmap.rayure);
@@ -57,24 +58,23 @@ public class choiceLevel extends AppCompatActivity implements SensorEventListene
         loadButton();
     }
 
-
     @Override
     public void onSensorChanged(SensorEvent event) {
 
     }
 
     @Override
-    protected void onResume() {
-
-        super.onResume();
-
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
 
+    /**
+     * Charge les données de la sauvegarde et affiche les boutons de levels correspondant
+     */
     @Override
     protected void onRestart() {
         super.onRestart();
-        loadArray(this);
+        loadGameData(this);
         loadButton();
     }
 
@@ -117,12 +117,11 @@ public class choiceLevel extends AppCompatActivity implements SensorEventListene
         }
     }
 
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
-    }
-
-    public void loadArray(Context mContext) {
+    /**
+     * Chargement de la sauvegarde via les SharedPreferences
+     * @param mContext
+     */
+    public void loadGameData(Context mContext) {
         SharedPreferences mSharedPreference1 = PreferenceManager.getDefaultSharedPreferences(mContext);
         if (mSharedPreference1 != null) {
             int size = mSharedPreference1.getInt("Status_size", 0);
