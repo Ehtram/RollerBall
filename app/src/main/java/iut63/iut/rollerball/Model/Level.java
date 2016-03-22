@@ -72,6 +72,8 @@ public class Level {
 
     Bitmap wallRepresentationHor,wallRepresentationVert,hole,winner;
 
+    private int Score;
+
     private List<Component> listComponent = new ArrayList<>();
     private Bitmap background;
     private double hypothenus;
@@ -83,6 +85,7 @@ public class Level {
     }
     public Ball getBall(){return ball;}
     public void setBall(Ball ball){this.ball=ball;}
+
     public Level(String name,Context context, SurfaceView surfaceView,int HeightScreen, int WidhtScreen,Ball ball){
         surfaceV = surfaceView;
         holder = surfaceView.getHolder();
@@ -98,6 +101,8 @@ public class Level {
         if (heightScreen > widhtScreen)
             background = BitmapFactory.decodeResource(context.getResources(), R.mipmap.backgroundvert);
         else background = BitmapFactory.decodeResource(context.getResources(), R.mipmap.background);
+
+        Score = 100;
     }
 
     public void addNewComponent(Component c){

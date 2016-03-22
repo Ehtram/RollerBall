@@ -11,10 +11,13 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
+
+import java.util.Map;
 
 import iut63.iut.rollerball.Model.Ball;
 import iut63.iut.rollerball.Model.Game;
@@ -75,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
      * @param event SensorEvent qui contient notamment les values du sensor
      */
     public void onSensorChanged (SensorEvent event){
-
+        Log.d("Sensor",String.valueOf(event.values[0]));
         Ball ball = game.getBall();
         float x, y;
         if (degrees == 0) {
@@ -130,14 +133,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
      *             et donc de régler l'affichage en conséquence
      */
     private void affichage(int fall){
-        if(fall==1){
-            retry.setVisibility(View.VISIBLE);
-            back.setVisibility(View.VISIBLE);
-            next.setVisibility(View.VISIBLE);
-        }else if(fall == -1){
-            retry.setVisibility(View.VISIBLE);
-            back.setVisibility(View.VISIBLE);
-        }
+//        if(fall==1){
+//            retry.setVisibility(View.VISIBLE);
+//            back.setVisibility(View.VISIBLE);
+//            next.setVisibility(View.VISIBLE);
+//        }else if(fall == -1){
+//            retry.setVisibility(View.VISIBLE);
+//            back.setVisibility(View.VISIBLE);
+//        }
     }
 
     /**
@@ -169,12 +172,29 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
      * @param level le niveau a débloqué
      */
     private void unlockNextLevel(int level) {
-        if(game.getLevelList().size()<level)
-            game.getLevelList().get(level).setUnlock(true);
+        if(game.getLevelList().size()<level) {
+            game.getLevelList().get(level+1).setUnlock(true);
+            putScoreInSharedPreferences(level);
+        }
     }
 
     /**
-     * Ajoute les listener sur les boutons retry back et next
+     * Méthode d'update du score du joueur dans les SharedPreferences
+     * @param level le level qu'il vient de terminer
+     */
+    private void putScoreInSharedPreferences(int level) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor mEdit1 = sp.edit();
+
+        int score = sp.getInt("Score",0);
+        score += level;
+        mEdit1.putInt("Score",score);
+        mEdit1.commit();
+    }
+
+    /**
+     * Ajoute les listener sur les boutons retry back et next,
+     * Not implemented Yet
      */
     private void addEventButton() {
         retry.setOnClickListener(new View.OnClickListener() {
@@ -215,6 +235,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
         return mEdit1.commit();
     }
+
+
 
     /**
      * Méthode de suppression des SharedPreferences.

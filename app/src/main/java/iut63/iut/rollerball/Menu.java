@@ -1,7 +1,10 @@
 package iut63.iut.rollerball;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 
@@ -65,11 +68,6 @@ public class Menu extends BaseGameActivity implements View.OnClickListener {
                                     getApiClient(), getString(R.string.leaderboard_id)),
                             2);
                 }
-                if(getApiClient().isConnected()){
-                    Games.Leaderboards.submitScore(getApiClient(),
-                            getString(R.string.leaderboard_id),
-                            2);
-                }
             }
         });
     }
@@ -112,4 +110,24 @@ public class Menu extends BaseGameActivity implements View.OnClickListener {
         findViewById(R.id.sign_out_button).setVisibility(View.GONE);
     }
 
+    @Override
+    protected void onDestroy() {
+        putScoreInLeaderBoard(this);
+        super.onDestroy();
+    }
+
+    /**
+     * Chargement de la sauvegarde du score via les SharedPreferences
+     * Et Ajout dans le classement Général si l'utilisateur est connecté
+     * @param mContext
+     */
+    public void putScoreInLeaderBoard(Context mContext) {
+        SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(mContext);
+        if (mSharedPreference != null) {
+            int score = mSharedPreference.getInt("Score", 0);
+            if (getApiClient().isConnected()) {
+                Games.Leaderboards.submitScore(getApiClient(), getString(R.string.leaderboard_id), score);
+            }
+        }
+    }
 }

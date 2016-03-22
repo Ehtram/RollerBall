@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * Classe de choix du level
  */
-public class choiceLevel extends AppCompatActivity implements SensorEventListener {
+public class choiceLevel extends AppCompatActivity  {
 
     final String EXTRA_CHOICE = "choiceLevel";
     private TableLayout tableLayout;
@@ -56,16 +56,6 @@ public class choiceLevel extends AppCompatActivity implements SensorEventListene
         int hypothenus = (int) Math.sqrt(Math.pow((int) heightScreen, 2) + Math.pow((int) widhtScreen, 2));
         ratio = (int) (hypothenus / 30.0f);
         loadButton();
-    }
-
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
     }
 
     /**
@@ -101,9 +91,12 @@ public class choiceLevel extends AppCompatActivity implements SensorEventListene
                         else b.setBackgroundResource(R.mipmap.rayure);
                     } else if (((j + 1) + (nbButtonPossible * i)) == 1) {
                         b.setBackgroundResource(R.mipmap.tick);
-                        b.setEnabled(false);
+                        b.setEnabled(true);
                     }
-                } else {b.setBackgroundResource(R.mipmap.rayure);b.setEnabled(false);}
+                } else {
+                    b.setBackgroundResource(R.mipmap.rayure);
+                    b.setEnabled(false);
+                }
 
                 b.setOnClickListener(new View.OnClickListener() {
                     @Override
